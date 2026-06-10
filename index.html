@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>无人机智能巡检平台｜产品设计作品集</title>
+  <style>
+    :root{--ink:#10233f;--muted:#64748b;--blue:#2864dc;--cyan:#35a5e8;--soft:#f4f8fd;--line:#dfe8f2;--white:#fff;--navy:#0c1e36;--green:#17a673;--orange:#f59e0b}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:#fff;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;line-height:1.7}a{text-decoration:none;color:inherit}button{font:inherit;cursor:pointer}
+    .nav{position:fixed;z-index:20;left:0;right:0;top:0;height:68px;padding:0 max(24px,calc((100vw - 1180px)/2));display:flex;align-items:center;background:#ffffffed;backdrop-filter:blur(15px);border-bottom:1px solid #e8eef5}.logo{font-size:18px;font-weight:900;letter-spacing:.5px}.logo b{color:var(--blue)}.nav-links{margin-left:auto;display:flex;gap:25px;font-size:13px;color:#52647c}.nav-links a:hover{color:var(--blue)}.nav .cta{margin-left:24px;padding:9px 15px;border-radius:8px;background:var(--blue);color:#fff;font-size:13px}
+    .hero{min-height:760px;padding:150px 24px 80px;position:relative;overflow:hidden;background:linear-gradient(145deg,#f8fbff 0%,#edf5ff 48%,#fff 100%)}.hero:before{content:"";position:absolute;width:700px;height:700px;border-radius:50%;right:-220px;top:-230px;background:radial-gradient(circle,#69c6ff44 0%,#3688e322 45%,transparent 70%)}.hero-inner{max-width:1180px;margin:auto;position:relative;display:grid;grid-template-columns:1fr 1.08fr;gap:75px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:99px;color:#2458b6;background:#e1eeff;font-size:12px;font-weight:800;letter-spacing:.8px}.hero h1{font-size:58px;line-height:1.12;margin:22px 0 20px;letter-spacing:-2px}.hero h1 span{color:var(--blue)}.lead{max-width:570px;color:#53657d;font-size:17px}.hero-actions{display:flex;gap:12px;margin-top:32px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 19px;border:1px solid var(--line);border-radius:9px;background:#fff;font-weight:800;font-size:14px}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 9px 24px #2864dc3b}.hero-meta{margin-top:38px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.hero-meta div{padding-left:13px;border-left:2px solid #b7d4f8}.hero-meta span{display:block;font-size:11px;color:#7b8ba0}.hero-meta strong{font-size:13px}
+    .device{padding:10px;border-radius:20px;background:#10233f;box-shadow:0 35px 70px #19395c38;transform:perspective(1000px) rotateY(-3deg) rotateX(1deg)}.device-top{height:25px;display:flex;align-items:center;gap:5px;padding-left:7px}.device-top i{width:7px;height:7px;border-radius:50%;background:#3c526d}.screen{height:470px;border-radius:11px;overflow:hidden;background:#f6f8fb;display:grid;grid-template-columns:82px 1fr}.mini-side{background:#fff;border-right:1px solid #dfe7f0;padding:16px 9px}.mini-brand{height:8px;width:52px;background:#10233f;border-radius:4px;margin-bottom:18px}.mini-nav{height:19px;border-radius:5px;background:#e3edfc;margin:7px 0}.mini-nav:nth-child(n+3){background:#eef2f6}.mini-main{padding:18px}.mini-head{height:20px;width:190px;background:#10233f;border-radius:5px;margin-bottom:19px}.mini-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.mini-card{height:67px;border-radius:7px;background:#fff;border:1px solid #e3e9f0}.mini-grid{display:grid;grid-template-columns:1fr 1.7fr;gap:12px;margin-top:12px}.mini-panel{height:270px;border-radius:8px;background:#fff;border:1px solid #e3e9f0;padding:13px}.mini-alert{height:50px;border:1px solid #e7ecf2;border-radius:6px;margin-bottom:9px}.mini-chart{height:210px;display:flex;align-items:end;gap:15px;padding:25px 15px 10px;border-bottom:1px solid #c8d1dd}.mini-chart i{flex:1;background:#397ce8;border-radius:4px 4px 0 0}.mini-chart i:nth-child(1){height:92%;background:#ef4a50}.mini-chart i:nth-child(2){height:63%;background:#f59e0b}.mini-chart i:nth-child(3){height:43%}.mini-chart i:nth-child(4){height:22%}
+    section{padding:100px 24px}.wrap{max-width:1180px;margin:auto}.section-kicker{font-size:12px;font-weight:900;letter-spacing:1.5px;color:var(--blue);text-transform:uppercase}.section-title{font-size:38px;line-height:1.25;margin:10px 0 16px}.section-desc{max-width:700px;color:var(--muted);margin:0 0 45px}.summary{background:var(--navy);color:#fff}.summary .section-kicker{color:#68b6ff}.summary .section-desc{color:#aebed0}.summary-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:60px}.challenge{font-size:25px;line-height:1.55;margin:0;color:#fff}.challenge b{color:#68b6ff}.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fact{padding:20px;border:1px solid #ffffff20;border-radius:12px;background:#ffffff09}.fact strong{display:block;font-size:25px}.fact span{color:#9fb0c5;font-size:12px}
+    .problem-grid,.role-grid,.insight-grid,.principle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.item{padding:27px;border:1px solid var(--line);border-radius:14px;background:#fff}.num{width:36px;height:36px;border-radius:9px;background:#e7f0ff;color:var(--blue);display:grid;place-items:center;font-weight:900}.item h3{margin:17px 0 8px;font-size:18px}.item p{margin:0;color:var(--muted);font-size:14px}.soft{background:var(--soft)}.role{padding:30px 25px;border-radius:14px;background:#fff;box-shadow:0 8px 25px #2243650c}.role-icon{font-size:29px}.role h3{margin:10px 0 0}.role b{font-size:12px;color:var(--blue)}.role ul{padding-left:18px;color:var(--muted);font-size:13px}
+    .architecture{background:#f8fbff}.arch-shell{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:24px;border:1px solid var(--line);border-radius:16px;background:#fff}.arch-side{padding:20px;border-radius:11px;background:#12263f;color:#fff}.arch-side b{display:block;margin-bottom:20px}.arch-side span{display:block;padding:9px 10px;margin:5px 0;border-radius:6px;font-size:12px;color:#bdcbe0}.arch-side span.active{background:#2864dc;color:#fff}.arch-content{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.arch-module{min-height:120px;padding:19px;border:1px solid var(--line);border-radius:11px}.arch-module b{display:block;margin-bottom:7px}.arch-module span{font-size:12px;color:var(--muted)}
+    .flow{display:flex;align-items:stretch;gap:9px;overflow:auto;padding-bottom:8px}.flow-step{min-width:175px;padding:22px;border-radius:12px;background:#fff;border:1px solid var(--line)}.flow-step small{color:var(--blue);font-weight:900}.flow-step b{display:block;margin:7px 0}.flow-step span{color:var(--muted);font-size:12px}.arrow{align-self:center;color:#9db0c7;font-size:22px}
+    .design-system{background:var(--navy);color:#fff}.design-system .section-desc{color:#aebed0}.ds-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.ds-card{padding:28px;border-radius:14px;background:#fff;color:var(--ink)}.colors{display:flex;gap:12px;margin-top:20px}.swatch{flex:1;height:100px;border-radius:10px;padding:12px;color:#fff;font-size:11px;display:flex;align-items:end}.type-demo{font-size:36px;font-weight:900;margin:16px 0 7px}.components{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:20px}.chip{padding:6px 11px;border-radius:99px;background:#dcfae6;color:#067647;font-size:12px}.sample-input{height:40px;padding:0 12px;border:1px solid #d0d5dd;border-radius:7px}.sample-button{height:40px;padding:0 16px;border:0;border-radius:7px;background:var(--blue);color:#fff;font-weight:700}
+    .screens-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}.screen-card{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:#fff;transition:.25s}.screen-card:hover{transform:translateY(-4px);box-shadow:0 20px 45px #24456316}.screen-visual{height:265px;padding:18px;background:#edf3fa}.ui{height:100%;display:grid;grid-template-columns:55px 1fr;background:#f8fafc;border-radius:7px;overflow:hidden;box-shadow:0 8px 24px #2a48641c}.ui-side{background:#fff;border-right:1px solid #e3eaf1;padding:8px 6px}.ui-side i{display:block;height:14px;border-radius:3px;background:#edf1f5;margin:6px 0}.ui-side i.on{background:#d8e7ff}.ui-main{padding:13px}.ui-title{height:12px;width:35%;background:#142a45;border-radius:3px;margin-bottom:13px}.ui-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.ui-cards i{height:35px;background:#fff;border:1px solid #e2e8f0;border-radius:4px}.ui-large{height:130px;background:#fff;border:1px solid #e2e8f0;border-radius:5px;margin-top:7px}.ui-table{height:17px;border-bottom:1px solid #dfe5ec;margin-top:6px}.ui-video{height:175px;border-radius:5px;background:linear-gradient(145deg,#75b9db,#08799d)}.ui-chart{height:155px;margin-top:8px;border-bottom:1px solid #abb8c7;display:flex;align-items:end;gap:10px;padding:15px}.ui-chart i{flex:1;background:#3b82f6;border-radius:3px 3px 0 0}.screen-copy{padding:23px}.screen-copy small{color:var(--blue);font-weight:800}.screen-copy h3{margin:5px 0 7px}.screen-copy p{margin:0;color:var(--muted);font-size:13px}
+    .prototype{background:#ecf5ff}.prototype-box{display:grid;grid-template-columns:.75fr 1.25fr;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 25px 70px #2a568220}.prototype-copy{padding:55px}.prototype-copy h2{font-size:36px;line-height:1.25;margin:10px 0 17px}.prototype-copy p{color:var(--muted)}.prototype-features{margin:25px 0;display:grid;gap:8px;font-size:13px}.prototype-features span:before{content:"✓";color:var(--green);font-weight:900;margin-right:8px}.prototype-preview{min-height:480px;background:#0e223b;padding:18px;position:relative}.prototype-preview iframe{width:100%;height:100%;min-height:444px;border:0;border-radius:10px;background:#fff}.prototype-preview:after{content:"可点击交互原型";position:absolute;right:30px;top:29px;padding:6px 10px;border-radius:99px;background:#0d1c30d9;color:#fff;font-size:11px;pointer-events:none}
+    .reflection-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:35px}.quote{padding:35px;border-radius:15px;background:#10233f;color:#fff;font-size:23px;line-height:1.55}.learnings{display:grid;gap:12px}.learning{padding:20px;border-left:3px solid var(--blue);background:var(--soft)}.learning b{display:block}.learning span{font-size:13px;color:var(--muted)}.next{padding:55px;border-radius:20px;background:linear-gradient(135deg,#1f5bd5,#27a6de);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:25px}.next h2{font-size:34px;margin:0 0 8px}.next p{margin:0;color:#ddebff}.next .btn{white-space:nowrap}
+    .site-footer{padding:40px 24px;background:#09182b;color:#9fb0c5}.site-footer .wrap{display:flex;justify-content:space-between}.site-footer b{color:#fff}
+    .top-btn{position:fixed;right:20px;bottom:20px;width:42px;height:42px;border:0;border-radius:50%;background:#10233f;color:#fff;opacity:0;pointer-events:none;transition:.2s}.top-btn.show{opacity:1;pointer-events:auto}
+    @media(max-width:900px){.nav-links{display:none}.hero{padding-top:115px}.hero-inner,.summary-grid,.prototype-box,.reflection-grid{grid-template-columns:1fr}.hero h1{font-size:45px}.device{max-width:650px}.problem-grid,.role-grid,.insight-grid,.principle-grid{grid-template-columns:1fr 1fr}.arch-shell{grid-template-columns:1fr}.arch-content{grid-template-columns:1fr 1fr}.screens-grid{grid-template-columns:1fr}.ds-grid{grid-template-columns:1fr}}
+    @media(max-width:600px){section{padding:70px 18px}.hero h1{font-size:38px}.hero-meta,.problem-grid,.role-grid,.insight-grid,.principle-grid,.arch-content{grid-template-columns:1fr}.device{display:none}.hero-inner{display:block}.section-title{font-size:31px}.facts{grid-template-columns:1fr 1fr}.prototype-copy{padding:30px}.prototype-preview{min-height:360px}.prototype-preview iframe{min-height:325px}.next{padding:35px;display:block}.next .btn{margin-top:22px}.site-footer .wrap{display:block}.colors{flex-wrap:wrap}.swatch{min-width:120px}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="logo" href="#top">DRONE <b>INSIGHT</b></a>
+    <div class="nav-links"><a href="#background">项目背景</a><a href="#research">需求洞察</a><a href="#architecture">信息架构</a><a href="#screens">界面设计</a><a href="#prototype">交互原型</a><a href="#reflection">项目复盘</a></div>
+    <a class="cta" href="prototype/" target="_blank">打开原型 ↗</a>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">PRODUCT DESIGN CASE STUDY</span>
+        <h1>无人机智能<br><span>巡检管理平台</span></h1>
+        <p class="lead">面向水库、堤坝等大型设施的无人机巡检中台，通过设备管理、AI 识别、风险预警和统计分析，构建从发现问题到闭环处置的一体化工作流。</p>
+        <div class="hero-actions"><a class="btn primary" href="#prototype">体验交互原型</a><a class="btn" href="#background">阅读设计过程</a></div>
+        <div class="hero-meta"><div><span>项目类型</span><strong>B 端管理平台</strong></div><div><span>我的角色</span><strong>产品 / UX / 原型</strong></div><div><span>设计周期</span><strong>概念项目 · 3 周</strong></div></div>
+      </div>
+      <div class="device">
+        <div class="device-top"><i></i><i></i><i></i></div>
+        <div class="screen"><div class="mini-side"><div class="mini-brand"></div><div class="mini-nav"></div><div class="mini-nav"></div><div class="mini-nav"></div><div class="mini-nav"></div><div class="mini-nav"></div></div><div class="mini-main"><div class="mini-head"></div><div class="mini-metrics"><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div></div><div class="mini-grid"><div class="mini-panel"><div class="mini-alert"></div><div class="mini-alert"></div><div class="mini-alert"></div></div><div class="mini-panel"><div class="mini-chart"><i></i><i></i><i></i><i></i></div></div></div></div></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="summary" id="background">
+    <div class="wrap">
+      <span class="section-kicker">01 / PROJECT OVERVIEW</span><h2 class="section-title">从“看见数据”到“完成处置”</h2><p class="section-desc">项目探索如何将分散的无人机设备、视频画面、AI 识别结果与应急流程整合进同一套工作台。</p>
+      <div class="summary-grid"><p class="challenge">传统人工巡检存在范围大、周期长、危险区域难抵达的问题；而单独引入无人机后，又容易产生设备、视频、预警与任务相互割裂的新问题。设计目标是建立一个<b>统一、可追踪、可协同</b>的巡检闭环。</p><div class="facts"><div class="fact"><strong>5</strong><span>核心业务模块</span></div><div class="fact"><strong>3</strong><span>关键用户角色</span></div><div class="fact"><strong>1</strong><span>统一任务入口</span></div><div class="fact"><strong>闭环</strong><span>发现—研判—处置</span></div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="section-kicker">DESIGN CHALLENGE</span><h2 class="section-title">三个核心设计问题</h2><p class="section-desc">在没有真实业务系统约束的概念阶段，我将问题聚焦在信息整合、异常响应和跨角色协作三个方向。</p>
+      <div class="problem-grid"><article class="item"><span class="num">01</span><h3>信息分散</h3><p>设备状态、巡检任务、视频流和异常记录分布在不同入口，管理者难以快速建立全局认知。</p></article><article class="item"><span class="num">02</span><h3>响应滞后</h3><p>异常识别后缺少清晰的风险分级与处理状态，容易发生重复确认或无人跟进。</p></article><article class="item"><span class="num">03</span><h3>协同断层</h3><p>设备管理员、值班人员与决策者关注不同信息，缺少统一的任务上下文与处置记录。</p></article></div>
+    </div>
+  </section>
+
+  <section class="soft" id="research">
+    <div class="wrap">
+      <span class="section-kicker">02 / USERS & INSIGHTS</span><h2 class="section-title">围绕任务，而不是围绕功能</h2><p class="section-desc">平台面对的不是单一操作员，而是不同信息颗粒度的多个角色。界面需要同时支持实时操作与管理决策。</p>
+      <div class="role-grid"><article class="role"><div class="role-icon">🛰</div><h3>巡检操作员</h3><b>高频执行角色</b><ul><li>查看任务与设备状态</li><li>切换实时视频流</li><li>确认 AI 识别结果</li></ul></article><article class="role"><div class="role-icon">🛡</div><h3>应急值班员</h3><b>异常处置角色</b><ul><li>判断风险等级</li><li>发起应急任务</li><li>跟踪处置进度</li></ul></article><article class="role"><div class="role-icon">📊</div><h3>管理决策者</h3><b>低频分析角色</b><ul><li>掌握总体运行情况</li><li>评估覆盖与处理效率</li><li>审查设备和人员配置</li></ul></article></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="section-kicker">KEY INSIGHTS</span><h2 class="section-title">需求转化为设计策略</h2>
+      <div class="insight-grid"><article class="item"><span class="num">A</span><h3>状态优先</h3><p>列表中优先显示飞行、维护、风险和电量等影响下一步行动的状态信息。</p></article><article class="item"><span class="num">B</span><h3>逐层深入</h3><p>首页呈现总览，模块页承载操作，详情与弹窗负责局部编辑，降低单页认知负担。</p></article><article class="item"><span class="num">C</span><h3>异常可追踪</h3><p>预警不仅是一条消息，还应包含风险、位置、时间和处置状态，成为任务流的起点。</p></article></div>
+    </div>
+  </section>
+
+  <section class="architecture" id="architecture">
+    <div class="wrap">
+      <span class="section-kicker">03 / INFORMATION ARCHITECTURE</span><h2 class="section-title">一套稳定的后台导航框架</h2><p class="section-desc">以系统概览作为全局入口，业务模块沿“设备—识别—处置—分析—配置”展开。</p>
+      <div class="arch-shell"><div class="arch-side"><b>无人机巡检平台</b><span class="active">系统概览</span><span>无人机管理</span><span>AI 智能识别</span><span>应急指挥</span><span>数据统计</span><span>系统管理</span></div><div class="arch-content"><div class="arch-module"><b>系统概览</b><span>核心指标 / 近期预警 / 风险分布 / 任务趋势</span></div><div class="arch-module"><b>无人机管理</b><span>设备列表 / 状态筛选 / 任务管理 / 维护信息</span></div><div class="arch-module"><b>AI 智能识别</b><span>实时视频 / 识别记录 / 预警规则</span></div><div class="arch-module"><b>应急指挥</b><span>预警研判 / 任务创建 / 人员指派 / 进度跟踪</span></div><div class="arch-module"><b>数据统计</b><span>预警分析 / 巡检分析 / 设备分析 / 报告导出</span></div><div class="arch-module"><b>系统管理</b><span>用户 / 角色权限 / 设备 / 参数 / 日志</span></div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="section-kicker">CORE USER FLOW</span><h2 class="section-title">从 AI 发现异常到任务闭环</h2><p class="section-desc">最关键的体验不是单个页面，而是异常如何在角色之间持续流转。</p>
+      <div class="flow"><div class="flow-step"><small>STEP 01</small><b>执行巡检任务</b><span>无人机按预设航线采集实时画面。</span></div><span class="arrow">→</span><div class="flow-step"><small>STEP 02</small><b>AI 识别异常</b><span>系统标记疑似人员、设施异常或信号问题。</span></div><span class="arrow">→</span><div class="flow-step"><small>STEP 03</small><b>人工研判风险</b><span>值班员确认风险等级、位置和可信度。</span></div><span class="arrow">→</span><div class="flow-step"><small>STEP 04</small><b>创建处置任务</b><span>指派负责人并补充任务要求。</span></div><span class="arrow">→</span><div class="flow-step"><small>STEP 05</small><b>完成与复盘</b><span>记录处置结果，数据进入统计分析。</span></div></div>
+    </div>
+  </section>
+
+  <section class="design-system">
+    <div class="wrap">
+      <span class="section-kicker">04 / DESIGN SYSTEM</span><h2 class="section-title">克制、清晰、状态可读</h2><p class="section-desc">视觉系统以高密度后台场景为前提，减少装饰，强调状态颜色、信息层级和操作一致性。</p>
+      <div class="ds-grid"><div class="ds-card"><b>色彩系统</b><div class="colors"><div class="swatch" style="background:#2864dc">Primary<br>#2864DC</div><div class="swatch" style="background:#17a673">Success<br>#17A673</div><div class="swatch" style="background:#f59e0b">Warning<br>#F59E0B</div><div class="swatch" style="background:#f04438">Danger<br>#F04438</div></div></div><div class="ds-card"><b>排版与组件</b><div class="type-demo">巡检平台 Aa</div><span style="color:var(--muted);font-size:13px">Microsoft YaHei / 12—38 px / 规则化信息层级</span><div class="components"><input class="sample-input" value="搜索设备..."><span class="chip">飞行中</span><button class="sample-button">＋ 添加无人机</button></div></div></div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <div class="wrap">
+      <span class="section-kicker">05 / KEY SCREENS</span><h2 class="section-title">五个核心业务页面</h2><p class="section-desc">原型刻意保留适度细节，重点演示信息架构、页面关系和关键操作，而非最终开发视觉稿。</p>
+      <div class="screens-grid">
+        <article class="screen-card"><div class="screen-visual"><div class="ui"><div class="ui-side"><i class="on"></i><i></i><i></i><i></i><i></i></div><div class="ui-main"><div class="ui-title"></div><div class="ui-cards"><i></i><i></i><i></i><i></i></div><div class="ui-large"><div class="ui-chart"><i style="height:85%;background:#ef4444"></i><i style="height:62%;background:#f59e0b"></i><i style="height:40%"></i><i style="height:20%"></i></div></div></div></div></div><div class="screen-copy"><small>01 / OVERVIEW</small><h3>系统概览</h3><p>以四项关键指标和预警分布帮助管理者迅速判断今日运行状态。</p></div></article>
+        <article class="screen-card"><div class="screen-visual"><div class="ui"><div class="ui-side"><i></i><i class="on"></i><i></i><i></i><i></i></div><div class="ui-main"><div class="ui-title"></div><div class="ui-large" style="padding:12px"><div class="ui-table"></div><div class="ui-table"></div><div class="ui-table"></div><div class="ui-table"></div><div class="ui-table"></div><div class="ui-table"></div><div class="ui-table"></div></div></div></div></div><div class="screen-copy"><small>02 / FLEET</small><h3>无人机管理</h3><p>集中呈现设备状态、电量、高度、速度和位置，支持搜索、筛选与编辑。</p></div></article>
+        <article class="screen-card"><div class="screen-visual"><div class="ui"><div class="ui-side"><i></i><i></i><i class="on"></i><i></i><i></i></div><div class="ui-main"><div class="ui-title"></div><div class="ui-video"></div></div></div></div><div class="screen-copy"><small>03 / AI MONITORING</small><h3>AI 智能识别</h3><p>在视频流之间快速切换，查看在线状态与实时画面，为异常研判提供依据。</p></div></article>
+        <article class="screen-card"><div class="screen-visual"><div class="ui"><div class="ui-side"><i></i><i></i><i></i><i></i><i class="on"></i></div><div class="ui-main"><div class="ui-title"></div><div class="ui-large"><div class="ui-chart"><i style="height:25%"></i><i style="height:55%"></i><i style="height:35%"></i><i style="height:75%"></i><i style="height:45%"></i><i style="height:88%"></i></div></div></div></div></div><div class="screen-copy"><small>04 / ANALYTICS</small><h3>数据统计</h3><p>将预警、处理率、覆盖率和设备完好率转化为可比较的趋势与风险结构。</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="prototype" id="prototype">
+    <div class="wrap">
+      <div class="prototype-box">
+        <div class="prototype-copy"><span class="section-kicker">INTERACTIVE PROTOTYPE</span><h2>亲自走一遍<br>核心业务流程</h2><p>右侧嵌入的是可操作原型。你可以切换侧栏模块、搜索设备、筛选状态、切换视频流，并打开新增或编辑弹窗。</p><div class="prototype-features"><span>六个侧栏业务入口</span><span>五个完整核心页面</span><span>搜索、筛选与状态反馈</span><span>新增、编辑和任务弹窗</span></div><a class="btn primary" href="prototype/" target="_blank">全屏打开原型 ↗</a></div>
+        <div class="prototype-preview"><iframe src="prototype/" title="无人机平台交互原型"></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reflection">
+    <div class="wrap">
+      <span class="section-kicker">06 / REFLECTION</span><h2 class="section-title">项目复盘与下一步</h2><p class="section-desc">这套作品强调的是产品结构与交互表达。若进入真实项目，还需要通过业务调研和数据验证进一步收敛。</p>
+      <div class="reflection-grid"><div class="quote">“后台产品的价值不在于把所有数据都展示出来，而在于让不同角色知道：现在发生了什么，以及下一步应该做什么。”</div><div class="learnings"><div class="learning"><b>先定义任务闭环</b><span>页面结构应服务于业务流程，而不是简单罗列模块。</span></div><div class="learning"><b>状态信息要可行动</b><span>状态、风险和位置必须能直接支持下一步判断。</span></div><div class="learning"><b>真实验证仍然重要</b><span>下一阶段应访谈巡检人员，验证字段优先级和异常处置规则。</span></div></div></div>
+      <div class="next" style="margin-top:55px"><div><h2>项目交付物</h2><p>完整案例网站 + 五页面交互原型 + 信息架构与核心流程说明</p></div><a class="btn" href="prototype/" target="_blank">查看交互原型</a></div>
+    </div>
+  </section>
+
+  <footer class="site-footer"><div class="wrap"><span><b>无人机智能巡检平台</b> · 产品设计案例</span><span>Concept Project · 2026</span></div></footer>
+  <button class="top-btn" id="topBtn" aria-label="返回顶部">↑</button>
+  <script>
+    const topBtn=document.getElementById("topBtn");
+    addEventListener("scroll",()=>topBtn.classList.toggle("show",scrollY>600));
+    topBtn.onclick=()=>scrollTo({top:0,behavior:"smooth"});
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{const target=document.querySelector(a.getAttribute("href"));if(target){e.preventDefault();target.scrollIntoView({behavior:"smooth"})}}));
+  </script>
+</body>
+</html>

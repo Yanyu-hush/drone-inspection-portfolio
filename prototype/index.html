@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>无人机智能巡检平台 - 交互原型</title>
+  <style>
+    :root{--blue:#2563eb;--bg:#f7f9fc;--panel:#fff;--line:#e6eaf0;--text:#101828;--muted:#667085;--green:#12b76a;--red:#f04438;--orange:#f59e0b;--purple:#7c3aed;--side:256px}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",sans-serif;font-size:14px}button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+    .side{position:fixed;inset:0 auto 0 0;width:var(--side);background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:10}
+    .brand{height:64px;padding:0 17px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-size:19px;font-weight:800}
+    .nav{padding:12px}.nav button{width:100%;height:40px;border:0;border-radius:8px;background:none;color:#344054;text-align:left;padding:0 12px;margin-bottom:2px;font-weight:600}.nav button:hover{background:#f2f4f7}.nav button.active{background:#eaf2ff;color:var(--blue)}
+    .nav .ico{display:inline-block;width:25px}.side-user{margin-top:auto;border-top:1px solid var(--line);height:66px;padding:10px 16px;display:flex;align-items:center;gap:10px}.avatar{width:34px;height:34px;border-radius:50%;background:#eaf2ff;color:var(--blue);display:grid;place-items:center}.small{font-size:12px;color:var(--muted)}
+    .app{margin-left:var(--side);min-height:100vh}.top{height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 24px;position:sticky;top:0;z-index:8}.top-search{margin-left:18px;width:258px;height:39px;border:1px solid #d0d5dd;border-radius:7px;padding:0 14px}.top-user{margin-left:auto;display:flex;align-items:center;gap:10px}.icon-btn{border:0;background:none;border-radius:8px;padding:8px;color:#475467}.icon-btn:hover{background:#f2f4f7}
+    main{padding:25px 24px 74px;min-height:calc(100vh - 64px)}h1{font-size:28px;margin:0 0 6px}.subtitle{color:var(--muted);margin-bottom:18px}.tabs{height:44px;border-bottom:1px solid var(--line);display:flex;gap:2px;margin-bottom:24px}.tab{border:0;background:none;padding:0 16px;color:#475467;font-weight:600;border-bottom:2px solid transparent}.tab.active{color:var(--blue);border-color:var(--blue)}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 3px rgba(16,24,40,.05)}.card-head{height:60px;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 24px;font-size:17px;font-weight:800}.card-body{padding:22px}
+    .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}.metric{padding:20px;min-height:130px;position:relative}.metric .label{color:var(--muted);font-weight:600}.metric .value{font-size:27px;font-weight:800;margin-top:25px}.trend{position:absolute;right:18px;bottom:18px;border-radius:20px;padding:4px 9px;font-size:12px;background:#dcfae6;color:#067647}
+    .overview-grid{display:grid;grid-template-columns:520px 1fr;gap:22px}.alert{padding:14px;border:1px solid var(--line);border-radius:8px;margin-bottom:12px}.alert strong{display:block;margin-bottom:7px}.row-between{display:flex;justify-content:space-between;gap:10px}.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:12px;font-weight:600}.blue{background:#dbeafe;color:#175cd3}.green{background:#dcfae6;color:#067647}.yellow{background:#fef0c7;color:#b54708}.red{background:#fee4e2;color:#d92d20}.purple{background:#f0e5ff;color:#6938ef}.gray{background:#f2f4f7;color:#344054}
+    .bars{height:270px;padding:30px 35px 20px;display:flex;align-items:flex-end;gap:7%;border-bottom:1px solid #98a2b3;margin:20px}.bar{flex:1;min-width:45px;height:var(--h);background:var(--c);border-radius:6px 6px 0 0;position:relative}.bar span{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:12px;color:var(--muted)}
+    .toolbar{display:flex;align-items:center;gap:9px;margin-bottom:22px}.input,.select{height:43px;border:1px solid #d0d5dd;border-radius:8px;background:#fff;padding:0 14px}.input{width:256px}.toolbar .spacer{margin-left:auto}.btn{height:42px;border:0;border-radius:7px;padding:0 17px;font-weight:600;background:#f2f4f7;color:#344054}.btn:hover{filter:brightness(.97)}.btn.primary{background:var(--blue);color:#fff}.btn.danger{background:#fee4e2;color:#d92d20}
+    .table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:900px}.table th,.table td{text-align:left;border-bottom:1px solid var(--line);padding:12px 14px;white-space:nowrap}.table th{background:#f8fafc;color:#475467;font-size:12px}.table tr:last-child td{border-bottom:0}.link{border:0;background:none;color:var(--blue);padding:2px 5px}.battery{display:inline-block;width:64px;height:8px;background:#e4e7ec;border-radius:5px;vertical-align:middle;margin-right:7px}.battery i{display:block;height:100%;border-radius:5px;background:var(--green)}
+    .ai-grid{display:grid;grid-template-columns:520px 1fr;gap:22px}.stream{border:1px solid var(--line);border-radius:9px;padding:15px;margin-bottom:12px;cursor:pointer}.stream.active{border-color:#84adff;background:#eff6ff}.video{height:520px;border-radius:9px;background:linear-gradient(145deg,#68b7d8 0%,#1f86b5 35%,#09739b 65%,#07566f 100%);position:relative;overflow:hidden}.video:before{content:"";position:absolute;left:-10%;right:-10%;top:20%;height:42%;background:#6b9477;clip-path:polygon(0 45%,25% 20%,48% 40%,72% 5%,100% 28%,100% 100%,0 100%);opacity:.85}.video:after{content:"模拟实时视频画面";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:28px;font-weight:800;text-shadow:0 2px 8px #0008}.live{position:absolute;z-index:2;top:14px;left:14px;background:#101828bb;color:#fff;padding:5px 9px;border-radius:5px}.video-controls{position:absolute;z-index:3;left:14px;right:14px;bottom:14px;display:flex;justify-content:space-between;color:#fff}
+    .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.line-chart{height:310px;padding:25px}.line-chart svg{width:100%;height:100%}.pie{width:200px;height:200px;border-radius:50%;background:conic-gradient(var(--red) 0 15%,var(--orange) 15% 50%,#3b82f6 50% 100%);margin:45px auto 20px}.legend{text-align:center}.legend span{margin:0 8px}
+    .sys-tabs{display:flex;background:#f2f4f7;border-radius:9px;width:max-content;padding:4px;margin-bottom:16px}.sys-tabs button{border:0;background:none;padding:10px 48px;border-radius:7px;font-weight:600}.sys-tabs button.active{background:#fff;color:var(--blue);box-shadow:0 1px 3px #0001}
+    .empty{padding:70px 20px;text-align:center;color:var(--muted)}footer{position:fixed;left:var(--side);right:0;bottom:0;height:48px;background:#fff;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;color:var(--muted);font-size:12px}
+    .modal-backdrop{position:fixed;inset:0;background:#10182880;z-index:30;display:grid;place-items:center}.modal{width:min(500px,calc(100vw - 30px));background:#fff;border-radius:12px;box-shadow:0 24px 48px #0003}.modal-head{padding:18px 22px;border-bottom:1px solid var(--line);font-size:18px;font-weight:800}.modal-body{padding:22px}.field{margin-bottom:15px}.field label{display:block;margin-bottom:6px;color:#475467}.field input,.field select{width:100%;height:42px;border:1px solid #d0d5dd;border-radius:7px;padding:0 12px}.modal-foot{padding:15px 22px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:9px}.toast{position:fixed;right:24px;bottom:70px;background:#101828;color:#fff;padding:12px 17px;border-radius:8px;opacity:0;transform:translateY(8px);transition:.2s;z-index:50}.toast.show{opacity:1;transform:none}
+    @media(max-width:1100px){.metrics{grid-template-columns:repeat(2,1fr)}.overview-grid,.ai-grid,.chart-grid{grid-template-columns:1fr}.video{height:400px}}
+    @media(max-width:760px){:root{--side:0px}.side{transform:translateX(-100%);width:250px}.side.open{transform:none}.app{margin-left:0}footer{left:0}.top-search{width:180px}.metrics{grid-template-columns:1fr}.toolbar{flex-wrap:wrap}.toolbar .spacer{display:none}.sys-tabs{width:100%;overflow:auto}.sys-tabs button{padding:10px 20px}main{padding:20px 14px 70px}}
+  </style>
+</head>
+<body>
+  <aside class="side" id="side">
+    <div class="brand"><span>无人机巡检平台</span><button class="icon-btn" id="closeSide">‹</button></div>
+    <nav class="nav">
+      <button class="active" data-page="overview"><span class="ico">▦</span>系统概览</button>
+      <button data-page="drones"><span class="ico">✈</span>无人机管理</button>
+      <button data-page="ai"><span class="ico">▣</span>AI智能识别</button>
+      <button data-page="emergency"><span class="ico">△</span>应急指挥</button>
+      <button data-page="stats"><span class="ico">ǁ</span>数据统计</button>
+      <button data-page="system"><span class="ico">⚙</span>系统管理</button>
+    </nav>
+    <div class="side-user"><div class="avatar">♙</div><div><b>管理员</b><div class="small">信息中心</div></div></div>
+  </aside>
+  <div class="app">
+    <header class="top"><button class="icon-btn" id="menuBtn">‹</button><input class="top-search" placeholder="搜索..."><div class="top-user"><button class="icon-btn" id="themeBtn">◐</button><button class="icon-btn" id="noticeBtn">♧</button><div class="avatar">♙</div><div><b>管理员</b><div class="small">信息中心</div></div></div></header>
+    <main id="main"></main>
+  </div>
+  <footer><span>© 2026 无人机智能巡检平台 - 交互原型</span><span>帮助中心　系统文档　联系我们</span></footer>
+  <div class="modal-backdrop hidden" id="modal"><div class="modal"><div class="modal-head" id="modalTitle">操作</div><div class="modal-body" id="modalBody"></div><div class="modal-foot"><button class="btn" id="cancelModal">取消</button><button class="btn primary" id="confirmModal">确认</button></div></div></div>
+  <div class="toast" id="toast"></div>
+  <script>
+    const main=document.getElementById("main"),modal=document.getElementById("modal"),toast=document.getElementById("toast");
+    const drones=[
+      {id:"D-001",name:"巡检一号",type:"多旋翼",status:"飞行中",battery:75,height:120,speed:15,place:"水库北岸"},
+      {id:"D-002",name:"巡检二号",type:"固定翼",status:"待飞",battery:90,height:0,speed:0,place:"基地停机坪"},
+      {id:"D-003",name:"巡检三号",type:"多旋翼",status:"维护中",battery:50,height:0,speed:0,place:"维修车间"},
+      {id:"D-004",name:"巡检四号",type:"垂直起降",status:"返航中",battery:30,height:80,speed:20,place:"水库南岸"},
+      {id:"D-005",name:"巡检五号",type:"多旋翼",status:"充电中",battery:60,height:0,speed:0,place:"充电基站"}
+    ];
+    const users=[["admin","管理员","超级管理员","信息中心"],["zhang_san","张三","系统操作员","安保部"],["li_si","李四","系统操作员","环境部"],["wang_wu","王五","系统操作员","工程技术部"],["zhao_liu","赵六","只读用户","管理层"]];
+    let currentPage="overview";
+    const badge=s=>({飞行中:"blue",待飞:"yellow",维护中:"purple",返航中:"green",充电中:"purple"}[s]||"gray");
+    function showToast(t){toast.textContent=t;toast.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>toast.classList.remove("show"),1600)}
+    function openModal(title,body,confirm="确认"){document.getElementById("modalTitle").textContent=title;document.getElementById("modalBody").innerHTML=body;document.getElementById("confirmModal").textContent=confirm;modal.classList.remove("hidden")}
+    function closeModal(){modal.classList.add("hidden")}
+    function pageHead(title,sub=""){return `<h1>${title}</h1>${sub?`<div class="subtitle">${sub}</div>`:""}`}
+    function overview(){
+      return `${pageHead("无人机智能巡检平台","今日运行概览")}
+      <section class="metrics">${[["今日预警数","28","+12%"],["在执行任务","6","3 架待执行"],["AI识别准确率","98.7%","+0.5%"],["本月巡检覆盖","92%","-2%"]].map(x=>`<div class="card metric"><div class="label">${x[0]}</div><div class="value">${x[1]}</div><span class="trend">${x[2]}</span></div>`).join("")}</section>
+      <section class="overview-grid"><div class="card"><div class="card-head">⚠　近期预警</div><div class="card-body">${["水库北岸发现可疑人员","监测到水位异常波动","设备信号不稳定"].map((x,i)=>`<div class="alert"><div class="row-between"><strong>${x}</strong><span class="badge ${["red","yellow","blue"][i]}">${["高风险","中风险","低风险"][i]}</span></div><span class="small">点击查看详情</span></div>`).join("")}<button class="btn" style="width:100%" data-action="alerts">查看全部预警</button></div></div>
+      <div class="card"><div class="card-head">预警类型分布</div><div class="bars"><div class="bar" style="--h:90%;--c:#f04438"><span>违规行为</span></div><div class="bar" style="--h:62%;--c:#f59e0b"><span>异常情况</span></div><div class="bar" style="--h:42%;--c:#3b82f6"><span>安全隐患</span></div><div class="bar" style="--h:20%;--c:#94a3b8"><span>其他</span></div></div></div></section>`;
+    }
+    function droneRows(list=drones){return list.map(d=>`<tr><td><b>${d.id}</b></td><td>${d.name}</td><td>${d.type}</td><td><span class="badge ${badge(d.status)}">${d.status}</span></td><td><span class="battery"><i style="width:${d.battery}%"></i></span>${d.battery}%</td><td>${d.height}</td><td>${d.speed}</td><td>${d.place}</td><td>2026-06-08</td><td><button class="link edit-drone" data-id="${d.id}">编辑</button></td></tr>`).join("")}
+    function dronesPage(){
+      return `${pageHead("无人机巡检管理")}<div class="tabs"><button class="tab active">无人机列表</button><button class="tab">任务管理</button></div>
+      <div class="toolbar"><input id="droneSearch" class="input" placeholder="搜索无人机ID或名称"><select id="statusFilter" class="select"><option>全部状态</option><option>飞行中</option><option>待飞</option><option>维护中</option><option>返航中</option><option>充电中</option></select><span class="spacer"></span><button class="btn" data-action="refresh">⟳ 刷新</button><button class="btn" data-action="export">⇩ 导出</button><button class="btn primary" data-action="add-drone">＋ 添加无人机</button></div>
+      <div class="card"><div class="card-head">✈　无人机列表</div><div class="card-body table-wrap"><table class="table"><thead><tr><th>无人机ID</th><th>无人机名称</th><th>类型</th><th>状态</th><th>电池</th><th>高度(m)</th><th>速度(m/s)</th><th>位置</th><th>最后维护</th><th>操作</th></tr></thead><tbody id="droneBody">${droneRows()}</tbody></table></div></div>`;
+    }
+    function aiPage(){
+      return `${pageHead("AI智能识别预警")}<div class="tabs"><button class="tab active">实时监控</button><button class="tab">识别记录</button><button class="tab">预警设置</button></div>
+      <div class="ai-grid"><div class="card"><div class="card-head">▣　视频流列表</div><div class="card-body">${[["水库北岸实时监控","D-001","在线"],["水库中心实时监控","D-004","在线"],["大坝区域实时监控","D-002","离线"]].map((x,i)=>`<div class="stream ${i===0?"active":""}" data-stream="${x[0]}"><div class="row-between"><strong>${x[0]}</strong><span class="badge ${x[2]==="在线"?"green":"gray"}">${x[2]}</span></div><div class="small">无人机: ${x[1]}　分辨率: 1080p</div></div>`).join("")}</div></div>
+      <div class="card"><div class="card-head" id="streamTitle">◉　水库北岸实时监控</div><div class="card-body"><div class="video"><span class="live">● 直播中</span><div class="video-controls"><span>Ⅱ　🔈</span><span>－　＋　↻</span></div></div></div></div></div>`;
+    }
+    function statsPage(){
+      return `${pageHead("数据统计分析")}<div class="tabs"><button class="tab active">数据概览</button><button class="tab">预警分析</button><button class="tab">巡检分析</button><button class="tab">设备分析</button></div>
+      <div class="toolbar"><select class="select"><option>近30天</option><option>近7天</option><option>本年度</option></select><span class="spacer"></span><button class="btn" data-action="refresh">⟳ 刷新数据</button><button class="btn" data-action="export">⇩ 导出报表</button></div>
+      <section class="metrics">${[["总预警数","140","+12%"],["处理率","92%","+2%"],["巡检覆盖率","91%","-1%"],["设备完好率","97%","+0.5%"]].map(x=>`<div class="card metric"><div class="label">${x[0]}</div><div class="value">${x[1]}</div><span class="trend">${x[2]}</span></div>`).join("")}</section>
+      <div class="chart-grid"><div class="card"><div class="card-head">预警趋势分析</div><div class="line-chart"><svg viewBox="0 0 700 260"><g stroke="#e5e7eb"><path d="M25 30H680M25 90H680M25 150H680M25 210H680"/></g><path d="M25 190 C90 70 130 170 190 125 S280 50 330 105 S430 15 485 100 S585 160 680 70" fill="none" stroke="#3b82f6" stroke-width="4"/><path d="M25 80 C100 45 160 65 220 50 S340 75 400 48 S520 60 590 45 S650 58 680 68" fill="none" stroke="#10b981" stroke-width="4"/></svg><div class="legend"><span style="color:#3b82f6">● 预警数</span><span style="color:#10b981">● 处理率</span></div></div></div>
+      <div class="card"><div class="card-head">风险等级分布</div><div class="pie"></div><div class="legend"><span style="color:#f04438">■ 高风险 15%</span><span style="color:#f59e0b">■ 中风险 35%</span><span style="color:#3b82f6">■ 低风险 50%</span></div></div></div>`;
+    }
+    function systemPage(){
+      return `${pageHead("系统管理")}<div class="sys-tabs"><button class="active">用户管理</button><button>角色权限</button><button>设备管理</button><button>系统参数</button><button>系统日志</button></div>
+      <div class="toolbar"><input id="userSearch" class="input" placeholder="搜索用户名、姓名或部门"><select class="select"><option>全部状态</option><option>启用</option><option>停用</option></select><span class="spacer"></span><button class="btn" data-action="refresh">⟳ 刷新</button><button class="btn" data-action="export">⇩ 导出</button><button class="btn primary" data-action="add-user">＋ 添加用户</button></div>
+      <div class="card"><div class="card-head">♧　用户管理</div><div class="card-body table-wrap"><table class="table"><thead><tr><th>用户名</th><th>姓名</th><th>角色</th><th>部门</th><th>状态</th><th>最后登录</th><th>创建时间</th><th>操作</th></tr></thead><tbody id="userBody">${userRows(users)}</tbody></table></div></div>`;
+    }
+    function userRows(list){return list.map(u=>`<tr><td><b>${u[0]}</b></td><td>${u[1]}</td><td>${u[2]}</td><td>${u[3]}</td><td><span class="badge green">启用</span></td><td>2026-06-08 09:30</td><td>2026-05-01</td><td><button class="link edit-user" data-user="${u[0]}">编辑</button><button class="link" style="color:#f04438">删除</button></td></tr>`).join("")}
+    function emptyPage(){return `${pageHead("应急指挥","告警处置与协同调度")}<div class="card"><div class="empty"><div style="font-size:50px">△</div><h2>应急指挥流程原型</h2><p>选择预警后可创建处置任务、指派人员并跟踪状态。</p><button class="btn primary" data-action="create-task">创建应急任务</button></div></div>`}
+    function render(page=currentPage){
+      currentPage=page;document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+      main.innerHTML=({overview,drones:dronesPage,ai:aiPage,stats:statsPage,system:systemPage,emergency:emptyPage}[page]||overview)();
+      bindPage();
+    }
+    function bindPage(){
+      main.querySelectorAll("[data-action]").forEach(b=>b.onclick=()=>{
+        const a=b.dataset.action;
+        if(a==="refresh")showToast("数据已刷新");
+        if(a==="export")showToast("已生成原型导出任务");
+        if(a==="alerts")showToast("进入全部预警列表");
+        if(a==="create-task")openModal("创建应急任务",`<div class="field"><label>任务名称</label><input value="水库异常处置"></div><div class="field"><label>负责人</label><select><option>张三</option><option>李四</option></select></div>`);
+        if(a==="add-drone")openModal("添加无人机",`<div class="field"><label>无人机名称</label><input placeholder="例如：巡检六号"></div><div class="field"><label>设备类型</label><select><option>多旋翼</option><option>固定翼</option></select></div>`);
+        if(a==="add-user")openModal("添加用户",`<div class="field"><label>用户名</label><input></div><div class="field"><label>角色</label><select><option>系统操作员</option><option>只读用户</option></select></div>`);
+      });
+      main.querySelectorAll(".edit-drone").forEach(b=>b.onclick=()=>openModal(`编辑 ${b.dataset.id}`,`<div class="field"><label>设备状态</label><select><option>待飞</option><option>维护中</option><option>充电中</option></select></div><div class="field"><label>备注</label><input placeholder="输入备注"></div>`));
+      main.querySelectorAll(".edit-user").forEach(b=>b.onclick=()=>openModal(`编辑用户 ${b.dataset.user}`,`<div class="field"><label>角色</label><select><option>系统操作员</option><option>只读用户</option></select></div>`));
+      main.querySelectorAll(".stream").forEach(s=>s.onclick=()=>{main.querySelectorAll(".stream").forEach(x=>x.classList.remove("active"));s.classList.add("active");document.getElementById("streamTitle").textContent="◉　"+s.dataset.stream});
+      const ds=document.getElementById("droneSearch"),sf=document.getElementById("statusFilter");
+      if(ds){const f=()=>{const q=ds.value.toLowerCase(),st=sf.value;document.getElementById("droneBody").innerHTML=droneRows(drones.filter(d=>(d.id+d.name).toLowerCase().includes(q)&&(st==="全部状态"||d.status===st)));bindPage()};ds.oninput=f;sf.onchange=f}
+      const us=document.getElementById("userSearch");if(us)us.oninput=()=>{const q=us.value.toLowerCase();document.getElementById("userBody").innerHTML=userRows(users.filter(u=>u.join("").toLowerCase().includes(q)))};
+      main.querySelectorAll(".tab,.sys-tabs button").forEach(t=>t.onclick=()=>{const p=t.parentElement;t.parentElement.querySelectorAll("button").forEach(x=>x.classList.remove("active"));t.classList.add("active");if(!t.textContent.includes("用户")&&!t.textContent.includes("无人机")&&!t.textContent.includes("实时")&&!t.textContent.includes("数据"))showToast(`${t.textContent.trim()}为流程占位页`)});
+    }
+    document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{render(b.dataset.page);document.getElementById("side").classList.remove("open")});
+    document.getElementById("menuBtn").onclick=()=>document.getElementById("side").classList.toggle("open");
+    document.getElementById("closeSide").onclick=()=>document.getElementById("side").classList.remove("open");
+    document.getElementById("themeBtn").onclick=()=>showToast("主题切换为原型占位交互");
+    document.getElementById("noticeBtn").onclick=()=>showToast("你有 3 条待处理通知");
+    document.getElementById("cancelModal").onclick=closeModal;document.getElementById("confirmModal").onclick=()=>{closeModal();showToast("操作已保存（原型）")};
+    modal.onclick=e=>{if(e.target===modal)closeModal()};render();
+  </script>
+</body>
+</html>
